@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { TokenPayload } from "../types/profiles";
 import { getPlayerData } from "../lib/api/axiosClient";
 import { queryClient } from "../main";
