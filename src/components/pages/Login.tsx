@@ -22,8 +22,8 @@ const Login: React.FC = () => {
 
           if (user.status === 200) {
             authData.login(accessToken);
-            setShowPage(false); // Trigger page transition
-            setNavigating(true); // Indicate that navigation is in progress
+            setShowPage(false);
+            setNavigating(true);
           }
         } catch (error) {
           console.error(`Failed to login: ${error}`);
@@ -44,7 +44,7 @@ const Login: React.FC = () => {
     if (navigating) {
       const timer = setTimeout(() => {
         navigate("/");
-      }, 300); // Adjust timeout to match animation duration
+      }, 300);
 
       return () => clearTimeout(timer);
     }
