@@ -12,9 +12,10 @@ tauri-build = { version = "1", features = [] }
 
 [dependencies]
 tauri-plugin-deep-link = { git = "https://github.com/FabianLars/tauri-plugin-deep-link", branch = "main" }
-tauri = { version = "1", features = [ "fs-all", "protocol-all", "shell-open"] }
+tauri = { version = "1", features = [ "dialog-all", "fs-all", "protocol-all", "shell-open"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+sha2 = "0.10.8"
 
 [features]
 # This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!

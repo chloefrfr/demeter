@@ -1,7 +1,26 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use tauri::{regex::Regex, Manager};
+use sha2::{Digest, Sha256};
+use tauri::{command, regex::Regex, Manager};
+
+#[command]
+async fn get_binary_hash(file_path: String) -> Result<String, String> {
+    let file_data = match std::fs::read(&file_path) {
+        Ok(data) => data,
+        Err(e) => return Err(format!("Error reading file: {}", e)),
+    };
+
+    let mut hasher = Sha256::new();
+    hasher.update(file_data);
+    let hash = hasher.finalize();
+    let hash_hex = hash
+        .iter()
+        .map(|byte| format!("{:02x}", byte))
+        .collect::<String>();
+
+    Ok(hash_hex)
+}
 
 fn main() {
     let auth_regex = Regex::new(r"demeter://auth:(.*)$").expect("Failed to compile regex");
@@ -37,7 +56,7 @@ fn main() {
 
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![])
+        .invoke_handler(tauri::generate_handler![get_binary_hash])
         .run(tauri::generate_context!())
         .expect("Error while running Tauri application");
 }
