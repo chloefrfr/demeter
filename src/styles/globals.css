@@ -33,3 +33,22 @@
 .dropdown-exit {
   animation: fadeOut 0.3s ease-in;
 }
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.relative::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid #87cefa;
+  border-radius: 1rem;
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+.rounded-xl {
+  border-radius: 1rem;
+}
